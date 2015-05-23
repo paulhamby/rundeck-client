@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/codegangsta/cli"
+	"github.com/paulhamby/rundeck-client/cmd"
 	"os"
 	"fmt"
 )
@@ -16,7 +17,7 @@ func main() {
 			Name:  "list-projects",
 			Usage: "List Projects",
 			Action: func(c *cli.Context) {
-				ListProjects()
+				cmd.ListProjects()
 			},
 		},
 		{
@@ -32,7 +33,7 @@ func main() {
 					projectid = c.Args()[0]
 				}
 
-				ListJobs(projectid)
+				cmd.ListJobs(projectid)
 			},
 		},
 		{
@@ -48,14 +49,14 @@ func main() {
 					projectid = c.Args()[0]
 				}
 
-				ListExecutions(projectid)
+				cmd.ListExecutions(projectid)
 			},
 		},
 		{
 			Name:  "list-tokens",
 			Usage: "List Tokens: rundeck-client list-tokens",
 			Action: func(c *cli.Context) {
-				ListTokens()
+				cmd.ListTokens()
 			},
 		},
 		{
@@ -71,7 +72,7 @@ func main() {
 					projectid = c.Args()[0]
 				}
 
-				GetHistory(projectid)
+				cmd.GetHistory(projectid)
 			},
 		},
 		{
@@ -87,7 +88,7 @@ func main() {
 					jobid = c.Args()[0]
 				}
 
-				GetJob(jobid)
+				cmd.GetJob(jobid)
 			},
 		},
 		{
@@ -105,7 +106,7 @@ func main() {
 					projectid = c.Args()[1]
 				}
 
-				FindJobByName(jobid,projectid)
+				cmd.FindJobByName(jobid,projectid)
 			},
 		},
 	}
