@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/codegangsta/cli"
 	"os"
+	"fmt"
 )
 
 func main() {
@@ -24,9 +25,13 @@ func main() {
 			Action: func(c *cli.Context) {
 				var projectid string
 
-				if len(c.Args()) > 0 {
+				if len(c.Args()) != 1 {
+					fmt.Printf("Usage: rundeck-client list-jobs projectid\n")
+					os.Exit(1)
+				} else {
 					projectid = c.Args()[0]
 				}
+
 				ListJobs(projectid)
 			},
 		},
@@ -36,9 +41,13 @@ func main() {
 			Action: func(c *cli.Context) {
 				var projectid string
 
-				if len(c.Args()) > 0 {
+				if len(c.Args()) != 1 {
+					fmt.Printf("Usage: rundeck-client list-executions projectid\n")
+					os.Exit(1)
+				} else {
 					projectid = c.Args()[0]
 				}
+
 				ListExecutions(projectid)
 			},
 		},
@@ -55,21 +64,29 @@ func main() {
 			Action: func(c *cli.Context) {
 				var projectid string
 
-				if len(c.Args()) > 0 {
+				if len(c.Args()) != 1 {
+					fmt.Printf("Usage: rundeck-client get-history projectid\n")
+					os.Exit(1)
+				} else {
 					projectid = c.Args()[0]
 				}
+
 				GetHistory(projectid)
 			},
 		},
-                {
+		{
 			Name:  "get-job",
 			Usage: "Get Job: rundeck-client get-job jobid",
 			Action: func(c *cli.Context) {
 				var jobid string
 
-				if len(c.Args()) > 0 {
+				if len(c.Args()) != 1 {
+					fmt.Printf("Usage: rundeck-client get-job jobid\n")
+					os.Exit(1)
+				} else {
 					jobid = c.Args()[0]
 				}
+
 				GetJob(jobid)
 			},
 		},
@@ -80,10 +97,14 @@ func main() {
 				var jobid string
 				var projectid string
 
-				if len(c.Args()) > 0 {
+				if len(c.Args()) != 2 {
+					fmt.Printf("Usage: rundeck-client find-job-by-name jobid projectid\n")
+					os.Exit(1)
+				} else {
 					jobid = c.Args()[0]
 					projectid = c.Args()[1]
 				}
+
 				FindJobByName(jobid,projectid)
 			},
 		},
