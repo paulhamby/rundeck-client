@@ -1,112 +1,159 @@
 package main
 
 import (
+	"fmt"
 	"github.com/codegangsta/cli"
+	"github.com/lusis/go-rundeck/src/rundeck.v12"
 	"github.com/paulhamby/rundeck-client/cmd"
 	"os"
-	"fmt"
 )
 
 func main() {
 	app := cli.NewApp()
 	app.Name = "go-rundeck"
 	app.Usage = "Rundeck CLI tool"
+	app.EnableBashCompletion = true
 
 	app.Commands = []cli.Command{
 		{
-			Name:  "list-projects",
-			Usage: "List Projects",
-			Action: func(c *cli.Context) {
-				cmd.ListProjects()
+			Name:  "project",
+			Aliases: []string{"p"},
+			Usage: "Project commands",
+			Subcommands: []cli.Command{
+				{
+					Name:  "list",
+					Usage: "List Projects: rundeck-client project list",
+					Action: func(c *cli.Context) {
+						cmd.ListProjects()
+					},
+				},
+				{
+					Name:  "executions",
+					Usage: "List Executions: rundeck-client project executions projectid",
+					Action: func(c *cli.Context) {
+						var projectid string
+
+						if len(c.Args()) != 1 {
+							fmt.Printf("List Executions: rundeck-client project executions projectid\n")
+							os.Exit(1)
+						} else {
+							projectid = c.Args()[0]
+						}
+
+						cmd.ListExecutions(projectid)
+					},
+				},
+				{
+					Name:  "history",
+					Usage: "List History: rundeck-client project history projectid",
+					Action: func(c *cli.Context) {
+						var projectid string
+
+						if len(c.Args()) != 1 {
+							fmt.Printf("Usage: rundeck-client project history projectid\n")
+							os.Exit(1)
+						} else {
+							projectid = c.Args()[0]
+						}
+
+						cmd.GetHistory(projectid)
+					},
+				},
 			},
 		},
 		{
-			Name:  "list-jobs",
-			Usage: "List Jobs: rundeck-client list-jobs projectid",
-			Action: func(c *cli.Context) {
-				var projectid string
+			Name:  "job",
+			Aliases: []string{"j"},
+			Usage: "job commands",
+			Subcommands: []cli.Command{
+				{
+					Name:  "list",
+					Usage: "List Jobs: rundeck-client job list projectid",
+					Action: func(c *cli.Context) {
+						var projectid string
 
-				if len(c.Args()) != 1 {
-					fmt.Printf("Usage: rundeck-client list-jobs projectid\n")
-					os.Exit(1)
-				} else {
-					projectid = c.Args()[0]
-				}
+						if len(c.Args()) != 1 {
+							fmt.Printf("List Jobs: rundeck-client job list projectid\n")
+							os.Exit(1)
+						} else {
+							projectid = c.Args()[0]
+						}
 
-				cmd.ListJobs(projectid)
-			},
-		},
-		{
-			Name:  "list-executions",
-			Usage: "List Executions: rundeck-client list-executions projectid",
-			Action: func(c *cli.Context) {
-				var projectid string
+						cmd.ListJobs(projectid)
+					},
+				},
+				{
+					Name:  "get",
+					Usage: "Get Job: rundeck-client job get jobid",
+					Action: func(c *cli.Context) {
+						var jobid string
 
-				if len(c.Args()) != 1 {
-					fmt.Printf("Usage: rundeck-client list-executions projectid\n")
-					os.Exit(1)
-				} else {
-					projectid = c.Args()[0]
-				}
+						if len(c.Args()) != 1 {
+							fmt.Printf("Usage: rundeck-client job get jobid\n")
+							os.Exit(1)
+						} else {
+							jobid = c.Args()[0]
+						}
 
-				cmd.ListExecutions(projectid)
-			},
-		},
-		{
-			Name:  "list-tokens",
-			Usage: "List Tokens: rundeck-client list-tokens",
-			Action: func(c *cli.Context) {
-				cmd.ListTokens()
-			},
-		},
-		{
-			Name:  "get-history",
-			Usage: "Get History: rundeck-client get-history projectid",
-			Action: func(c *cli.Context) {
-				var projectid string
+						cmd.GetJob(jobid)
+					},
+				},
+				{
+					Name:  "find",
+					Usage: "Find Job By Name: rundeck-client job find name projectid",
+					Action: func(c *cli.Context) {
+						var jobid string
+						var projectid string
 
-				if len(c.Args()) != 1 {
-					fmt.Printf("Usage: rundeck-client get-history projectid\n")
-					os.Exit(1)
-				} else {
-					projectid = c.Args()[0]
-				}
+						if len(c.Args()) != 2 {
+							fmt.Printf("Usage: rundeck-client job find jobid projectid\n")
+							os.Exit(1)
+						} else {
+							jobid = c.Args()[0]
+							projectid = c.Args()[1]
+						}
 
-				cmd.GetHistory(projectid)
-			},
-		},
-		{
-			Name:  "get-job",
-			Usage: "Get Job: rundeck-client get-job jobid",
-			Action: func(c *cli.Context) {
-				var jobid string
+						cmd.FindJobByName(jobid, projectid)
+					},
+				},
+				{
+					Name:  "options",
+					Usage: "Get Job Options: rundeck-client job options jobid",
+					Action: func(c *cli.Context) {
+						var jobid string
 
-				if len(c.Args()) != 1 {
-					fmt.Printf("Usage: rundeck-client get-job jobid\n")
-					os.Exit(1)
-				} else {
-					jobid = c.Args()[0]
-				}
+						if len(c.Args()) != 1 {
+							fmt.Printf("Get Job Options: rundeck-client job options jobid\n")
+							os.Exit(1)
+						} else {
+							jobid = c.Args()[0]
+						}
 
-				cmd.GetJob(jobid)
-			},
-		},
-		{
-			Name:  "find-job-by-name",
-			Usage: "Find Job By Name: rundeck-client find-job-by-name jobid projectid",
-			Action: func(c *cli.Context) {
-				var jobid string
-				var projectid string
+						cmd.GetRequiredJobOptions(jobid)
+					},
+				},
+				{
+					Name:  "run",
+					Usage: "Run Job: rundeck-client job run jobid options",
+					Action: func(c *cli.Context) {
+						var jobid string
+						var options rundeck.RunOptions
+						//var options string
 
-				if len(c.Args()) != 2 {
-					fmt.Printf("Usage: rundeck-client find-job-by-name jobid projectid\n")
-					os.Exit(1)
-				} else {
-					jobid = c.Args()[0]
-					projectid = c.Args()[1]
-				}
+						if len(c.Args()) <= 1 {
+							fmt.Printf("Run Job: rundeck-client job run jobid options\n")
+							os.Exit(1)
+						} else {
+							jobid = c.Args()[0]
+							o := c.Args()[1]
+							o = "-" + o
+							fmt.Printf(o)
+							options = rundeck.RunOptions{LogLevel: "DEBUG", AsUser: "", Arguments: o}
+						}
 
-				cmd.FindJobByName(jobid,projectid)
+						cmd.RunJob(jobid, options)
+					},
+				},
 			},
 		},
 	}
