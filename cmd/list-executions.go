@@ -5,7 +5,8 @@ import (
 	"os"
 	"strconv"
 	"github.com/olekukonko/tablewriter"
-	"github.com/lusis/go-rundeck/src/rundeck.v12"
+	//"github.com/lusis/go-rundeck/src/rundeck.v12"
+	"github.com/paulhamby/go-rundeck/src/rundeck.v12"
 )
 
 func ListExecutions(projectid string) {

@@ -56,6 +56,23 @@ func main() {
 						cmd.GetHistory(projectid)
 					},
 				},
+                                {
+                                        Name:  "execution-state",
+                                        Usage: "Get Execution State: rundeck-client project executionid",
+                                        Action: func(c *cli.Context) {
+                                                var executionid string
+
+                                                if len(c.Args()) != 1 {
+                                                        fmt.Printf("Get Execution State: rundeck-client project executionid\n")
+                                                        os.Exit(1)
+                                                } else {
+                                                        executionid = c.Args()[0]
+                                                }
+
+                                                cmd.GetExecutionstate(executionid)
+                                        },
+                                },
+
 			},
 		},
 		{
@@ -152,6 +169,7 @@ func main() {
 						cmd.RunJob(jobid, options)
 					},
 				},
+
 			},
 		},
 	}

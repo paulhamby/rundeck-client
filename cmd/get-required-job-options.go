@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"os"
 	//"strings"
-	"github.com/lusis/go-rundeck/src/rundeck.v12"
+	//"github.com/lusis/go-rundeck/src/rundeck.v12"
+	"github.com/paulhamby/go-rundeck/src/rundeck.v12"
 	"github.com/olekukonko/tablewriter"
 )
 
