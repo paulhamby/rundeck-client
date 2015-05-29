@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"github.com/codegangsta/cli"
-	"github.com/lusis/go-rundeck/src/rundeck.v12"
 	"github.com/paulhamby/rundeck-client/cmd"
 	"os"
 )
@@ -16,9 +15,9 @@ func main() {
 
 	app.Commands = []cli.Command{
 		{
-			Name:  "project",
+			Name:    "project",
 			Aliases: []string{"p"},
-			Usage: "Project commands",
+			Usage:   "Project commands",
 			Subcommands: []cli.Command{
 				{
 					Name:  "list",
@@ -62,9 +61,9 @@ func main() {
 			},
 		},
 		{
-			Name:  "job",
+			Name:    "job",
 			Aliases: []string{"j"},
-			Usage: "job commands",
+			Usage:   "job commands",
 			Subcommands: []cli.Command{
 				{
 					Name:  "list",
@@ -134,21 +133,23 @@ func main() {
 				},
 				{
 					Name:  "run",
-					Usage: "Run Job: rundeck-client job run jobid options",
+					Usage: "Run Job: rundeck-client job run jobid option1=option,option2=option",
 					Action: func(c *cli.Context) {
 						var jobid string
-						var options rundeck.RunOptions
-						//var options string
+						var options string
 
 						if len(c.Args()) <= 1 {
-							fmt.Printf("Run Job: rundeck-client job run jobid options\n")
+							fmt.Printf("Run Job: rundeck-client job run jobid option1=option,option2=option\n")
 							os.Exit(1)
 						} else {
-							jobid = c.Args()[0]
-							o := c.Args()[1]
-							o = "-" + o
-							fmt.Printf(o)
-							options = rundeck.RunOptions{LogLevel: "DEBUG", AsUser: "", Arguments: o}
+							args := c.Args()
+							jobid = args[0]
+							l := len(args)
+							s := 1
+							for s < l {
+								options = options + args[s]
+								s++
+							}
 						}
 
 						cmd.RunJob(jobid, options)
