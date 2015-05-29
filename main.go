@@ -11,6 +11,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "rundeck-client"
 	app.Usage = "Rundeck CLI tool"
+	app.Version = "0.0.1"
 
 	app.Commands = []cli.Command{
 		{
@@ -58,18 +59,20 @@ func main() {
 				},
                                 {
                                         Name:  "execution-state",
-                                        Usage: "Get Execution State: rundeck-client project executionid",
+                                        Usage: "Get Execution State: rundeck-client project executionid projectid",
                                         Action: func(c *cli.Context) {
                                                 var executionid string
+                                                var projectid string
 
-                                                if len(c.Args()) != 1 {
-                                                        fmt.Printf("Get Execution State: rundeck-client project executionid\n")
+                                                if len(c.Args()) != 2 {
+                                                        fmt.Printf("Get Execution State: rundeck-client project executionid projectid\n")
                                                         os.Exit(1)
                                                 } else {
                                                         executionid = c.Args()[0]
+                                                        projectid = c.Args()[1]
                                                 }
 
-                                                cmd.GetExecutionstate(executionid)
+                                                cmd.GetExecutionstate(executionid,projectid)
                                         },
                                 },
 
