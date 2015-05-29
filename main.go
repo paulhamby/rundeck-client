@@ -9,14 +9,12 @@ import (
 
 func main() {
 	app := cli.NewApp()
-	app.Name = "go-rundeck"
+	app.Name = "rundeck-client"
 	app.Usage = "Rundeck CLI tool"
-	app.EnableBashCompletion = true
 
 	app.Commands = []cli.Command{
 		{
 			Name:    "project",
-			Aliases: []string{"p"},
 			Usage:   "Project commands",
 			Subcommands: []cli.Command{
 				{
@@ -62,7 +60,6 @@ func main() {
 		},
 		{
 			Name:    "job",
-			Aliases: []string{"j"},
 			Usage:   "job commands",
 			Subcommands: []cli.Command{
 				{
