@@ -15,8 +15,8 @@ func main() {
 
 	app.Commands = []cli.Command{
 		{
-			Name:    "project",
-			Usage:   "Project commands",
+			Name:  "project",
+			Usage: "Project commands",
 			Subcommands: []cli.Command{
 				{
 					Name:  "list",
@@ -57,30 +57,29 @@ func main() {
 						cmd.GetHistory(projectid)
 					},
 				},
-                                {
-                                        Name:  "execution-state",
-                                        Usage: "Get Execution State: rundeck-client project executionid projectid",
-                                        Action: func(c *cli.Context) {
-                                                var executionid string
-                                                var projectid string
+				{
+					Name:  "execution-state",
+					Usage: "Get Execution State: rundeck-client project executionid projectid",
+					Action: func(c *cli.Context) {
+						var executionid string
+						var projectid string
 
-                                                if len(c.Args()) != 2 {
-                                                        fmt.Printf("Get Execution State: rundeck-client project executionid projectid\n")
-                                                        os.Exit(1)
-                                                } else {
-                                                        executionid = c.Args()[0]
-                                                        projectid = c.Args()[1]
-                                                }
+						if len(c.Args()) != 2 {
+							fmt.Printf("Get Execution State: rundeck-client project executionid projectid\n")
+							os.Exit(1)
+						} else {
+							executionid = c.Args()[0]
+							projectid = c.Args()[1]
+						}
 
-                                                cmd.GetExecutionstate(executionid,projectid)
-                                        },
-                                },
-
+						cmd.GetExecutionstate(executionid, projectid)
+					},
+				},
 			},
 		},
 		{
-			Name:    "job",
-			Usage:   "job commands",
+			Name:  "job",
+			Usage: "job commands",
 			Subcommands: []cli.Command{
 				{
 					Name:  "list",
@@ -172,7 +171,29 @@ func main() {
 						cmd.RunJob(jobid, options)
 					},
 				},
+			},
+		},
+		{
+			Name:  "adhoc",
+			Usage: "Run adhoc commands and scripts",
+			Subcommands: []cli.Command{
+				{
+					Name:  "command",
+					Usage: "Run adhoc command: rundeck-client adhoc command projectid 'command' ",
+					Action: func(c *cli.Context) {
+						var projectid string
+						var command string
+						if len(c.Args()) != 2 {
+							fmt.Printf("Run adhoc command: rundeck-client adhoc command projectid 'command'\n")
+							os.Exit(1)
+						} else {
+							projectid = c.Args()[0]
+							command = c.Args()[1]
+						}
 
+						cmd.RunAdhoc(projectid, command)
+					},
+				},
 			},
 		},
 	}
