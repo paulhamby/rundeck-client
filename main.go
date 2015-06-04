@@ -75,6 +75,22 @@ func main() {
 						cmd.GetExecutionstate(executionid, projectid)
 					},
 				},
+				{
+					Name:  "execution-output",
+					Usage: "Get Execution Output: rundeck-client project executionid",
+					Action: func(c *cli.Context) {
+						var executionid string
+
+						if len(c.Args()) != 1 {
+							fmt.Printf("Get Execution State: rundeck-client project executionid\n")
+							os.Exit(1)
+						} else {
+							executionid = c.Args()[0]
+						}
+
+						cmd.GetExecutionOutput(executionid)
+					},
+				},
 			},
 		},
 		{
