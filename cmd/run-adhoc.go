@@ -8,9 +8,9 @@ import (
 	"os"
 )
 
-func RunAdhoc(projectid string, exec string) {
+func RunAdhoc(projectid string, exec string, node_filter string) {
 	client := rundeck.NewClientFromEnv()
-	data, err := client.RunAdhoc(projectid, exec)
+	data, err := client.RunAdhoc(projectid, exec, node_filter)
 	if err != nil {
 		fmt.Printf("%s\n", err)
 	} else {

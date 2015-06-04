@@ -199,15 +199,23 @@ func main() {
 					Action: func(c *cli.Context) {
 						var projectid string
 						var command string
-						if len(c.Args()) != 2 {
+						var node_filter string
+						if len(c.Args()) <= 2 {
 							fmt.Printf("Run adhoc command: rundeck-client adhoc command projectid 'command'\n")
 							os.Exit(1)
 						} else {
-							projectid = c.Args()[0]
-							command = c.Args()[1]
+							args := c.Args()
+                                                        projectid = args[0]
+                                                        command = args[1]
+                                                        l := len(args)
+                                                        s := 2
+                                                        for s < l {
+                                                                node_filter = node_filter + args[s]
+                                                                s++
+                                                        }
 						}
 
-						cmd.RunAdhoc(projectid, command)
+						cmd.RunAdhoc(projectid, command, node_filter)
 					},
 				},
 			},
