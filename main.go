@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	"github.com/codegangsta/cli"
 	"github.com/paulhamby/rundeck-client/cmd"
 	"os"
@@ -197,25 +198,24 @@ func main() {
 					Name:  "command",
 					Usage: "Run adhoc command: rundeck-client adhoc command projectid 'command' ",
 					Action: func(c *cli.Context) {
-						var projectid string
-						var command string
-						var node_filter string
-						if len(c.Args()) <= 2 {
+						var nodeFilter string
+						args := c.Args()
+						nbrArgsPassed := len(args)
+
+						if nbrArgsPassed <= 2 {
 							fmt.Printf("Run adhoc command: rundeck-client adhoc command projectid 'command'\n")
 							os.Exit(1)
 						} else {
-							args := c.Args()
-                                                        projectid = args[0]
-                                                        command = args[1]
-                                                        l := len(args)
-                                                        s := 2
-                                                        for s < l {
-                                                                node_filter = node_filter + args[s]
-                                                                s++
-                                                        }
+							s := 2
+							for s < nbrArgsPassed {
+								nodeFilter = nodeFilter + args[s] + " "
+
+								s++
+							}
+							nodeFilter = strings.TrimSpace(nodeFilter)
 						}
 
-						cmd.RunAdhoc(projectid, command, node_filter)
+						cmd.RunAdhoc(args[0], args[1], nodeFilter)
 					},
 				},
 			},
