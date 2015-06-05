@@ -177,26 +177,23 @@ func main() {
 					Name:  "run",
 					Usage: "Run Job: rundeck-client job run projectid job option1=option,option2=option",
 					Action: func(c *cli.Context) {
-						var job string
 						var options string
-						var projectid string
+						args := c.Args()
+						nbrArgsPassed := len(args)
 
-						if len(c.Args()) <= 1 {
+						if nbrArgsPassed < 2 {
 							fmt.Printf("Run Job: rundeck-client job run projectid job option1=option,option2=option\n")
 							os.Exit(1)
 						} else {
-							args := c.Args()
-							projectid = args[0]
-							job = args[1]
-							l := len(args)
 							s := 2
-							for s < l {
-								options = options + args[s]
+							for s < nbrArgsPassed {
+								options = options + args[s] + " "
 								s++
 							}
+							options = strings.TrimSpace(options)
 						}
 
-						cmd.RunJob(projectid, job, options)
+						cmd.RunJob(args[0], args[1], options)
 					},
 				},
 			},
@@ -207,14 +204,14 @@ func main() {
 			Subcommands: []cli.Command{
 				{
 					Name:  "command",
-					Usage: "Run adhoc command: rundeck-client adhoc command projectid 'command' node-filters[optional]",
+					Usage: "Run adhoc command: rundeck-client adhoc command projectid 'command' node-filter",
 					Action: func(c *cli.Context) {
 						var nodeFilter string
 						args := c.Args()
 						nbrArgsPassed := len(args)
 
 						if nbrArgsPassed <= 2 {
-							fmt.Printf("Run adhoc command: rundeck-client adhoc command projectid 'command' node-filters[optional]\n")
+							fmt.Printf("Run adhoc command: rundeck-client adhoc command projectid 'command' node-filter\n")
 							os.Exit(1)
 						} else {
 							s := 2
