@@ -4,6 +4,10 @@ Most of this is borrowed from github.com/lusis/go-rundeck. It is using rundeck.v
 
 Hopefully lots more to be added soon.
 
+To enable bash completion:
+
+sudo cp rundeck-client.bash_completion /etc/bash_completion.d/rundeck-client
+
 TODO
 - add node list
 - add node filters (done)
