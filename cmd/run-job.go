@@ -42,15 +42,5 @@ func RunJob(projectid string, jobname string, options string) {
 			executionID = d.ID
 		}
 		GetExecutionstate(executionID, projectid)
-		/*
-			table := tablewriter.NewWriter(os.Stdout)
-			table.SetColWidth(50)
-			table.SetHeader([]string{"For job status run:"})
-			for _, d := range data.Executions {
-				table.Append([]string{"rundeck-client project execution-state " + d.ID})
-			}
-			table.Render()
-		*/
-
 	}
 }

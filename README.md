@@ -14,4 +14,3 @@ TODO
 - add ability to get the log from an execution (done)
 - add ability to run an adhoc command (done)
 - run job by name or id (done)
-- use default variables when running a job
