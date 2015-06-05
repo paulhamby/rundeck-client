@@ -170,7 +170,7 @@ func main() {
 							project = c.Args()[1]
 						}
 
-						cmd.GetRequiredJobOptions(job, project)
+						cmd.GetJobOptions(job, project)
 					},
 				},
 				{
