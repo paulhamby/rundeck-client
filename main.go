@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"strings"
 	"github.com/codegangsta/cli"
 	"github.com/paulhamby/rundeck-client/cmd"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -13,6 +13,7 @@ func main() {
 	app.Name = "rundeck-client"
 	app.Usage = "Rundeck CLI tool"
 	app.Version = "0.0.1"
+	app.EnableBashCompletion = true
 
 	app.Commands = []cli.Command{
 		{
@@ -26,14 +27,20 @@ func main() {
 						cmd.ListProjects()
 					},
 				},
+			},
+		},
+		{
+			Name:  "execution",
+			Usage: "Execution commands",
+			Subcommands: []cli.Command{
 				{
-					Name:  "executions",
-					Usage: "List Executions: rundeck-client project executions projectid",
+					Name:  "list",
+					Usage: "List Executions: rundeck-client execution list projectid",
 					Action: func(c *cli.Context) {
 						var projectid string
 
 						if len(c.Args()) != 1 {
-							fmt.Printf("List Executions: rundeck-client project executions projectid\n")
+							fmt.Printf("List Executions: rundeck-client execution list projectid\n")
 							os.Exit(1)
 						} else {
 							projectid = c.Args()[0]
@@ -44,12 +51,12 @@ func main() {
 				},
 				{
 					Name:  "history",
-					Usage: "List History: rundeck-client project history projectid",
+					Usage: "List History: rundeck-client execution history projectid",
 					Action: func(c *cli.Context) {
 						var projectid string
 
 						if len(c.Args()) != 1 {
-							fmt.Printf("Usage: rundeck-client project history projectid\n")
+							fmt.Printf("Usage: rundeck-client execution history projectid\n")
 							os.Exit(1)
 						} else {
 							projectid = c.Args()[0]
@@ -59,14 +66,14 @@ func main() {
 					},
 				},
 				{
-					Name:  "execution-state",
-					Usage: "Get Execution State: rundeck-client project executionid projectid",
+					Name:  "state",
+					Usage: "Get Execution State: rundeck-client execution state executionid projectid",
 					Action: func(c *cli.Context) {
 						var executionid string
 						var projectid string
 
 						if len(c.Args()) != 2 {
-							fmt.Printf("Get Execution State: rundeck-client project executionid projectid\n")
+							fmt.Printf("Get Execution State: rundeck-client execution state executionid projectid\n")
 							os.Exit(1)
 						} else {
 							executionid = c.Args()[0]
@@ -77,13 +84,13 @@ func main() {
 					},
 				},
 				{
-					Name:  "execution-output",
-					Usage: "Get Execution Output: rundeck-client project executionid",
+					Name:  "output",
+					Usage: "Get Execution Output: rundeck-client execution output executionid",
 					Action: func(c *cli.Context) {
 						var executionid string
 
 						if len(c.Args()) < 1 {
-							fmt.Printf("Get Execution Output: rundeck-client project executionid\n")
+							fmt.Printf("Get Execution Output: rundeck-client execution output executionid\n")
 							os.Exit(1)
 						} else {
 							executionid = c.Args()[0]
@@ -150,42 +157,46 @@ func main() {
 				},
 				{
 					Name:  "options",
-					Usage: "Get Job Options: rundeck-client job options jobid",
+					Usage: "Get Job Options: rundeck-client job options job project",
 					Action: func(c *cli.Context) {
-						var jobid string
+						var job string
+						var project string
 
-						if len(c.Args()) != 1 {
-							fmt.Printf("Get Job Options: rundeck-client job options jobid\n")
+						if len(c.Args()) != 2 {
+							fmt.Printf("Get Job Options: rundeck-client job options job project\n")
 							os.Exit(1)
 						} else {
-							jobid = c.Args()[0]
+							job = c.Args()[0]
+							project = c.Args()[1]
 						}
 
-						cmd.GetRequiredJobOptions(jobid)
+						cmd.GetRequiredJobOptions(job, project)
 					},
 				},
 				{
 					Name:  "run",
-					Usage: "Run Job: rundeck-client job run jobid option1=option,option2=option",
+					Usage: "Run Job: rundeck-client job run projectid job option1=option,option2=option",
 					Action: func(c *cli.Context) {
-						var jobid string
+						var job string
 						var options string
+						var projectid string
 
 						if len(c.Args()) <= 1 {
-							fmt.Printf("Run Job: rundeck-client job run jobid option1=option,option2=option\n")
+							fmt.Printf("Run Job: rundeck-client job run projectid job option1=option,option2=option\n")
 							os.Exit(1)
 						} else {
 							args := c.Args()
-							jobid = args[0]
+							projectid = args[0]
+							job = args[1]
 							l := len(args)
-							s := 1
+							s := 2
 							for s < l {
 								options = options + args[s]
 								s++
 							}
 						}
 
-						cmd.RunJob(jobid, options)
+						cmd.RunJob(projectid, job, options)
 					},
 				},
 			},

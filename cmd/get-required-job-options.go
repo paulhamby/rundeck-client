@@ -9,9 +9,19 @@ import (
 	"github.com/paulhamby/go-rundeck/src/rundeck.v12"
 )
 
-func GetRequiredJobOptions(jobid string) {
-	client := rundeck.NewClientFromEnv()
-	data, err := client.GetRequiredOpts(jobid)
+func GetRequiredJobOptions(job string, projectid string) {
+        var jobID string
+
+        client := rundeck.NewClientFromEnv()
+
+        jobByName, err := client.FindJobByName(job, projectid)
+        if err != nil {
+                fmt.Printf("%s\n", err)
+        } else {
+                jobID = jobByName.ID
+        }
+
+	data, err := client.GetRequiredOpts(jobID)
 	if err != nil {
 		fmt.Printf("%s\n", err)
 	} else {
