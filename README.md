@@ -8,7 +8,7 @@ TODO
 - add node list
 - add node filters (done)
 - add tab/auto completion (done - kinda..needs documentation)
-- get the execution state of a job after executing it
+- get the execution state of a job after executing it (done)
 - add ability to run adhoc scripts
 - add get all options function (instead of just required options)
 - add ability to get the log from an execution (done)

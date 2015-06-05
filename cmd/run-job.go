@@ -3,9 +3,9 @@ package cmd
 import (
 	"fmt"
 	//"github.com/lusis/go-rundeck/src/rundeck.v12"
-	"github.com/olekukonko/tablewriter"
+	//"github.com/olekukonko/tablewriter"
 	"github.com/paulhamby/go-rundeck/src/rundeck.v12"
-	"os"
+	//"os"
 	"strings"
 )
 
@@ -37,12 +37,20 @@ func RunJob(projectid string, jobname string, options string) {
 	if err != nil {
 		fmt.Printf("%s\n", err)
 	} else {
-		table := tablewriter.NewWriter(os.Stdout)
-		table.SetColWidth(50)
-		table.SetHeader([]string{"For job status run:"})
+		var executionID string
 		for _, d := range data.Executions {
-			table.Append([]string{"rundeck-client project execution-state " + d.ID})
+			executionID = d.ID
 		}
-		table.Render()
+		GetExecutionstate(executionID, projectid)
+		/*
+			table := tablewriter.NewWriter(os.Stdout)
+			table.SetColWidth(50)
+			table.SetHeader([]string{"For job status run:"})
+			for _, d := range data.Executions {
+				table.Append([]string{"rundeck-client project execution-state " + d.ID})
+			}
+			table.Render()
+		*/
+
 	}
 }
