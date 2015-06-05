@@ -26,7 +26,7 @@ func GetJobOptions(job string, projectid string) {
 		fmt.Printf("%s\n", err)
 	} else {
 		table := tablewriter.NewWriter(os.Stdout)
-		table.SetHeader([]string{"Name", "Default Value"})
+		table.SetHeader([]string{"Name (* = Required)", "Default Value"})
 		for n, v := range data {
 			table.Append([]string{n, v})
 		}
