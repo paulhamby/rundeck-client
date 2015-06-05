@@ -82,8 +82,8 @@ func main() {
 					Action: func(c *cli.Context) {
 						var executionid string
 
-						if len(c.Args()) != 1 {
-							fmt.Printf("Get Execution State: rundeck-client project executionid\n")
+						if len(c.Args()) < 1 {
+							fmt.Printf("Get Execution Output: rundeck-client project executionid\n")
 							os.Exit(1)
 						} else {
 							executionid = c.Args()[0]
@@ -196,14 +196,14 @@ func main() {
 			Subcommands: []cli.Command{
 				{
 					Name:  "command",
-					Usage: "Run adhoc command: rundeck-client adhoc command projectid 'command' ",
+					Usage: "Run adhoc command: rundeck-client adhoc command projectid 'command' node-filters[optional]",
 					Action: func(c *cli.Context) {
 						var nodeFilter string
 						args := c.Args()
 						nbrArgsPassed := len(args)
 
 						if nbrArgsPassed <= 2 {
-							fmt.Printf("Run adhoc command: rundeck-client adhoc command projectid 'command'\n")
+							fmt.Printf("Run adhoc command: rundeck-client adhoc command projectid 'command' node-filters[optional]\n")
 							os.Exit(1)
 						} else {
 							s := 2

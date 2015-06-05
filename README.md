@@ -13,3 +13,4 @@ TODO
 - add get all options function (instead of just required options)
 - add ability to get the log from an execution (done)
 - add ability to run an adhoc command (done)
+- run job by name or id
