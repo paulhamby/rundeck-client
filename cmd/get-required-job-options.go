@@ -3,25 +3,25 @@ package cmd
 import (
 	"fmt"
 	"os"
-	//"strings"
-	//"github.com/lusis/go-rundeck/src/rundeck.v12"
+//"strings"
+//"github.com/lusis/go-rundeck/src/rundeck.v12"
 	"github.com/olekukonko/tablewriter"
 	"github.com/paulhamby/go-rundeck/src/rundeck.v12"
 )
 
-func GetRequiredJobOptions(job string, projectid string) {
-        var jobID string
+func GetJobOptions(job string, projectid string) {
+	var jobID string
 
-        client := rundeck.NewClientFromEnv()
+	client := rundeck.NewClientFromEnv()
 
-        jobByName, err := client.FindJobByName(job, projectid)
-        if err != nil {
-                fmt.Printf("%s\n", err)
-        } else {
-                jobID = jobByName.ID
-        }
+	jobByName, err := client.FindJobByName(job, projectid)
+	if err != nil {
+		fmt.Printf("%s\n", err)
+	} else {
+		jobID = jobByName.ID
+	}
 
-	data, err := client.GetRequiredOpts(jobID)
+	data, err := client.GetOpts(jobID)
 	if err != nil {
 		fmt.Printf("%s\n", err)
 	} else {
