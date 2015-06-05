@@ -5,5 +5,8 @@ Most of this is borrowed from github.com/lusis/go-rundeck. It is using rundeck.v
 Hopefully lots more to be added soon.
 
 TODO
-add node list
-add node filters
+- add node list
+- add node filters (done)
+- add tab/auto completion
+- get the execution state of a job after executing it
+- add ability to run adhoc scripts
