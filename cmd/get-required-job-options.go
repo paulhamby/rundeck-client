@@ -5,8 +5,8 @@ import (
 	"os"
 	//"strings"
 	//"github.com/lusis/go-rundeck/src/rundeck.v12"
-	"github.com/paulhamby/go-rundeck/src/rundeck.v12"
 	"github.com/olekukonko/tablewriter"
+	"github.com/paulhamby/go-rundeck/src/rundeck.v12"
 )
 
 func GetRequiredJobOptions(jobid string) {
@@ -16,7 +16,6 @@ func GetRequiredJobOptions(jobid string) {
 		fmt.Printf("%s\n", err)
 	} else {
 		table := tablewriter.NewWriter(os.Stdout)
-		//table.SetHeader([]string{"Name", "URL", "EnforcedValues", "Required"})
 		table.SetHeader([]string{"Name", "Default Value"})
 		for n, v := range data {
 			table.Append([]string{n, v})

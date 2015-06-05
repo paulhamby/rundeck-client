@@ -36,9 +36,4 @@ func RunJob(jobid string, options string) {
 		}
 		table.Render()
 	}
-	/*} else {
-		for _, d := range data.Executions {
-			GetExecutionstate(d.ID)
-		}
-	}*/
 }

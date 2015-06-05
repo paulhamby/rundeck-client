@@ -3,9 +3,9 @@ package cmd
 import (
 	"fmt"
 	"os"
-//	"github.com/lusis/go-rundeck/src/rundeck.v12"
-	"github.com/paulhamby/go-rundeck/src/rundeck.v12"
+	//"github.com/lusis/go-rundeck/src/rundeck.v12"
 	"github.com/olekukonko/tablewriter"
+	"github.com/paulhamby/go-rundeck/src/rundeck.v12"
 )
 
 func ListJobs(projectid string) {
