@@ -51,7 +51,7 @@ To see the log from this execution, run 'rundeck-client execution output 60'
 
 ```
 
-![Execution Output](/../screenshots/execution-output.png?raw=true "Execution Output")
+![Execution Output](/../screenshots/screenshots/execution-output.png?raw=true "Execution Output")
 
 
 ### To enable bash completion:
