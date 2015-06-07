@@ -51,6 +51,9 @@ To see the log from this execution, run 'rundeck-client execution output 60'
 
 ```
 
+![Execution Output](/../screenshots/execution-output.png?raw=true "Execution Output")
+
+
 ### To enable bash completion:
 
 `sudo cp rundeck-client.bash_completion /etc/bash_completion.d/rundeck-client`
