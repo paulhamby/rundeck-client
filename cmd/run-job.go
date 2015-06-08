@@ -3,9 +3,7 @@ package cmd
 import (
 	"fmt"
 	//"github.com/lusis/go-rundeck/src/rundeck.v12"
-	//"github.com/olekukonko/tablewriter"
 	"github.com/paulhamby/go-rundeck/src/rundeck.v12"
-	//"os"
 	"strings"
 )
 
@@ -46,6 +44,6 @@ func RunJob(projectid string, jobname string, options string) {
 			executionID = d.ID
 		}
 		GetExecutionstate(executionID, projectid)
-		fmt.Printf("\nTo see the log from this execution, run 'rundeck-client execution output " +executionID+ "'\n\n")
+		fmt.Printf("\nTo see the log from this execution, run 'rundeck-client execution output " + executionID + "'\n\n")
 	}
 }

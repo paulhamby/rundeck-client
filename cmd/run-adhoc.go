@@ -13,7 +13,7 @@ func RunAdhoc(projectid string, exec string, node_filter string) {
 		fmt.Printf("%s\n", err)
 	} else {
 		GetExecutionstate(data.ID, projectid)
-                fmt.Printf("\nTo see the log from this execution, run 'rundeck-client execution output " +data.ID+ "'\n\n")
+		fmt.Printf("\nTo see the log from this execution, run 'rundeck-client execution output " + data.ID + "'\n\n")
 
 	}
 }

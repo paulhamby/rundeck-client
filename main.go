@@ -150,10 +150,10 @@ func main() {
 				{
 					Name:  "find",
 					Usage: "Find Job By Name: rundeck-client job find name",
-                                        Before: func(c *cli.Context) error {
-                                                ensureProject(c.GlobalString("project"))
-                                                return nil
-                                        },
+					Before: func(c *cli.Context) error {
+						ensureProject(c.GlobalString("project"))
+						return nil
+					},
 					Action: func(c *cli.Context) {
 						var jobid string
 
@@ -164,17 +164,17 @@ func main() {
 							jobid = c.Args()[0]
 						}
 
-                                                projectid := c.GlobalString("project")
+						projectid := c.GlobalString("project")
 						cmd.FindJobByName(jobid, projectid)
 					},
 				},
 				{
 					Name:  "options",
 					Usage: "Get Job Options: rundeck-client job options job project",
-                                        Before: func(c *cli.Context) error {
-                                                ensureProject(c.GlobalString("project"))
-                                                return nil
-                                        },
+					Before: func(c *cli.Context) error {
+						ensureProject(c.GlobalString("project"))
+						return nil
+					},
 					Action: func(c *cli.Context) {
 						var job string
 
@@ -185,17 +185,17 @@ func main() {
 							job = c.Args()[0]
 						}
 
-                                                projectid := c.GlobalString("project")
+						projectid := c.GlobalString("project")
 						cmd.GetJobOptions(job, projectid)
 					},
 				},
 				{
 					Name:  "run",
 					Usage: "Run Job: rundeck-client job run job option1=option,option2=option",
-                                        Before: func(c *cli.Context) error {
-                                                ensureProject(c.GlobalString("project"))
-                                                return nil
-                                        },
+					Before: func(c *cli.Context) error {
+						ensureProject(c.GlobalString("project"))
+						return nil
+					},
 					Action: func(c *cli.Context) {
 						var options string
 						args := c.Args()
@@ -213,7 +213,7 @@ func main() {
 							options = strings.TrimSpace(options)
 						}
 
-                                                projectid := c.GlobalString("project")
+						projectid := c.GlobalString("project")
 						cmd.RunJob(projectid, args[0], options)
 					},
 				},
@@ -226,10 +226,10 @@ func main() {
 				{
 					Name:  "command",
 					Usage: "Run adhoc command: rundeck-client adhoc command 'command' node-filter",
-                                        Before: func(c *cli.Context) error {
-                                                ensureProject(c.GlobalString("project"))
-                                                return nil
-                                        },
+					Before: func(c *cli.Context) error {
+						ensureProject(c.GlobalString("project"))
+						return nil
+					},
 					Action: func(c *cli.Context) {
 						var nodeFilter string
 						args := c.Args()
@@ -247,7 +247,7 @@ func main() {
 							}
 							nodeFilter = strings.TrimSpace(nodeFilter)
 						}
-                                                projectid := c.GlobalString("project")
+						projectid := c.GlobalString("project")
 						cmd.RunAdhoc(projectid, args[0], nodeFilter)
 					},
 				},
