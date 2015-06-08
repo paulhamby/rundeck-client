@@ -33,6 +33,18 @@ func main() {
 						cmd.ListProjects()
 					},
 				},
+				{
+					Name:  "list-nodes",
+					Usage: "List Nodes: rundeck-client project list-nodes",
+					Before: func(c *cli.Context) error {
+						ensureProject(c.GlobalString("project"))
+						return nil
+					},
+					Action: func(c *cli.Context) {
+						projectid := c.GlobalString("project")
+						cmd.ListNodes(projectid)
+					},
+				},
 			},
 		},
 		{

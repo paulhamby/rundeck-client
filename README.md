@@ -59,7 +59,7 @@ To see the log from this execution, run 'rundeck-client execution output 60'
 `sudo cp rundeck-client.bash_completion /etc/bash_completion.d/rundeck-client`
 
 TODO
-- add node list   
+- add node list (done)  
 - add node filters (done)   
 - add tab/auto completion (done)   
 - get the execution state of a job after executing it (done)   
