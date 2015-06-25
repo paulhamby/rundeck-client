@@ -17,19 +17,19 @@ func GetJobOptions(job string, projectid string) {
 	jobByName, err := client.FindJobByName(job, projectid)
 	if err != nil {
 		fmt.Printf("%s\n", err)
-	} else {
-		jobID = jobByName.ID
+		return
 	}
+	jobID = jobByName.ID
 
 	data, err := client.GetOpts(jobID)
 	if err != nil {
 		fmt.Printf("%s\n", err)
-	} else {
-		table := tablewriter.NewWriter(os.Stdout)
-		table.SetHeader([]string{"Name (* = Required)", "Default Value"})
-		for n, v := range data {
-			table.Append([]string{n, v})
-		}
-		table.Render()
+		return
 	}
+	table := tablewriter.NewWriter(os.Stdout)
+	table.SetHeader([]string{"Name (* = Required)", "Default Value"})
+	for n, v := range data {
+		table.Append([]string{n, v})
+	}
+	table.Render()
 }

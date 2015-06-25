@@ -36,10 +36,8 @@ func main() {
 				{
 					Name:  "list-nodes",
 					Usage: "List Nodes: rundeck-client project list-nodes",
-					Before: func(c *cli.Context) error {
-						ensureProject(c.GlobalString("project"))
-						return nil
-					},
+					Before: ensureProject1,
+
 					Action: func(c *cli.Context) {
 						projectid := c.GlobalString("project")
 						cmd.ListNodes(projectid)
@@ -264,4 +262,12 @@ func ensureProject(project string) {
 	} else {
 		return
 	}
+}
+
+var ensureProject1 = func(c *cli.Context) error {
+        project := c.GlobalString("project")
+	if project == "" {
+		return fmt.Errorf("Project flag must be set. Example: rundeck-client --project anvils\n\n")
+        }
+		return nil
 }

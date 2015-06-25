@@ -17,16 +17,16 @@ func GetExecutionOutput(executionid string) {
 
 	if err != nil {
 		fmt.Printf("%s\n", err)
-	} else {
-		for _, e := range data.Entries.Entry {
-			fmt.Printf("%s %s", e.Time, e.Node)
-			if e.Level == "ERROR" {
-				fmt.Println(red, e.Level, e.Log, reset)
-			} else if e.Level == "VERBOSE" {
-				fmt.Println(cyan,e.Level, e.Log, reset)
-			} else {
-				fmt.Println(green,e.Level, e.Log, reset)
-			}
+		return
+	}
+	for _, e := range data.Entries.Entry {
+		fmt.Printf("%s %s", e.Time, e.Node)
+		if e.Level == "ERROR" {
+			fmt.Println(red, e.Level, e.Log, reset)
+		} else if e.Level == "VERBOSE" {
+			fmt.Println(cyan, e.Level, e.Log, reset)
+		} else {
+			fmt.Println(green, e.Level, e.Log, reset)
 		}
 	}
 }

@@ -1,7 +1,7 @@
 all: clean test rundeck-client
 
 test:
-	#@go test rundeck-client -v
+	@go test -v ./...
 
 rundeck-client:
 	@go get ./... 

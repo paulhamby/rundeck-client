@@ -13,12 +13,12 @@ func ListJobs(projectid string) {
 	data, err := client.ListJobs(projectid)
 	if err != nil {
 		fmt.Printf("%s\n", err)
-	} else {
-		table := tablewriter.NewWriter(os.Stdout)
-		table.SetHeader([]string{"ID", "Name", "Description", "Group", "Project"})
-		for _, d := range data.Jobs {
-			table.Append([]string{d.ID, d.Name, d.Description, d.Group, d.Project})
-		}
-		table.Render()
+		return
 	}
+	table := tablewriter.NewWriter(os.Stdout)
+	table.SetHeader([]string{"ID", "Name", "Description", "Group", "Project"})
+	for _, d := range data.Jobs {
+		table.Append([]string{d.ID, d.Name, d.Description, d.Group, d.Project})
+	}
+	table.Render()
 }
