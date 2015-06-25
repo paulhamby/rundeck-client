@@ -68,4 +68,5 @@ TODO
 - add ability to get the log from an execution (done)   
 - add ability to run an adhoc command (done)   
 - run job by name (done)   
-- Put app commands in separate files for better layout
+- Put app commands in separate files for better layout (done)
+- Add more tests
