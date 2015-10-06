@@ -2,9 +2,8 @@ package cmd
 
 import (
 	"fmt"
+	. "github.com/lusis/go-rundeck/src/rundeck.v12"
 	"github.com/mgutz/ansi"
-	//"github.com/lusis/go-rundeck/src/rundeck.v12"
-	. "github.com/paulhamby/go-rundeck/src/rundeck.v12"
 )
 
 func GetExecutionOutput(executionid string) {
