@@ -6,6 +6,7 @@ test:
 rundeck-client:
 	@go get ./... 
 	@go build 
+        @go install
 
 clean:
 	@rm -rf rundeck-client

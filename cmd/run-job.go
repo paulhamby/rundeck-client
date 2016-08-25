@@ -21,7 +21,7 @@ func RunJob(projectid string, jobname string, options string) {
 
 	arguments := parseArguments(options)
 
-	o := rundeck.RunOptions{LogLevel: "INFO", AsUser: "", Arguments: arguments}
+	o := rundeck.RunOptions{LogLevel: "INFO", Arguments: arguments}
 	data, err := client.RunJob(jobID, o)
 	if err != nil {
 		fmt.Printf("%s\n", err)
